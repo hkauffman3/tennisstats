@@ -18,3 +18,10 @@ python3 src/scripts/get_records.py team.html output.html
 ```
 
 The script fetches rating data for each player and writes an HTML file (default `tennis_with_ratings.html`) containing the links and ratings.
+
+### Download this page:
+![USTA Team Page to Download](https://github.com/user-attachments/assets/9b7d536c-9d02-48dc-9c89-296d4133e178)
+
+### output looks like this
+![image](https://github.com/user-attachments/assets/0cc6fe8c-0c67-42d7-ba9f-80b3c664031a)
+
