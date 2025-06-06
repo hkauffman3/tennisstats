@@ -105,11 +105,11 @@ def main():
   <table id=\"records\">
     <thead>
       <tr>
-        <th>Name</th>
+        <th>Name (links to tennisrecord)</th>
         <th>Current Rating</th>
-        <th>Date</th>
+        <th>Current Rating Date</th>
         <th>Dynamic Rating</th>
-        <th>Date</th>
+        <th>Dynamic Rating Date</th>
       </tr>
     </thead>
     <tbody>
