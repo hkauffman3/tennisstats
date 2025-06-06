@@ -91,14 +91,49 @@ def main():
     html_header = """<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
+  <meta charset=\"utf-8\" />
   <title>TennisRecord Player Links With Ratings</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 6px 8px; }
+    th { cursor: pointer; background: #f2f2f2; }
+    tr:nth-child(even) { background: #f9f9f9; }
+  </style>
 </head>
 <body>
   <h1>TennisRecord Player Links With Ratings</h1>
-  <ul>
+  <table id=\"records\">
+    <thead>
+      <tr>
+        <th>Name (links to tennisrecord)</th>
+        <th>Current Rating</th>
+        <th>Current Rating Date</th>
+        <th>Dynamic Rating</th>
+        <th>Dynamic Rating Date</th>
+      </tr>
+    </thead>
+    <tbody>
 """
-    html_footer = """  </ul>
+    html_footer = """    </tbody>
+  </table>
+  <script>
+    const thStates = {};
+    document.querySelectorAll('#records th').forEach((th, idx) => {
+      th.addEventListener('click', () => sortTable(idx));
+    });
+    function sortTable(n) {
+      const table = document.getElementById('records');
+      const rows = Array.from(table.tBodies[0].rows);
+      const asc = thStates[n] = !thStates[n];
+      rows.sort((a, b) => {
+        const x = a.cells[n].innerText.trim();
+        const y = b.cells[n].innerText.trim();
+        return asc ? x.localeCompare(y, undefined, {numeric: true})
+                   : y.localeCompare(x, undefined, {numeric: true});
+      });
+      rows.forEach(r => table.tBodies[0].appendChild(r));
+    }
+  </script>
 </body>
 </html>
 """
@@ -121,11 +156,13 @@ def main():
             print(f"→ Current={current_rating} ({current_date}), Dynamic={dynamic_rating} ({dynamic_date})")
 
         list_items.append(
-            f'    <li>\n'
-            f'      <a href="{profile_url}" target="_blank">{name}</a>\n'
-            f'      (Current Rating {current_rating} as of {current_date}  |  '
-            f'Dynamic {dynamic_rating} as of {dynamic_date})\n'
-            f'    </li>\n'
+            f'      <tr>\n'
+            f'        <td><a href="{profile_url}" target="_blank">{name}</a></td>\n'
+            f'        <td>{current_rating}</td>\n'
+            f'        <td>{current_date}</td>\n'
+            f'        <td>{dynamic_rating}</td>\n'
+            f'        <td>{dynamic_date}</td>\n'
+            f'      </tr>\n'
         )
 
         # Sleep to avoid hammering the site too quickly
