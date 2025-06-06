@@ -4,7 +4,7 @@ This repository contains a script that extracts TennisRecord ratings for players
 
 ## Usage
 
-1. Save the USTA team summary as a full HTML file (e.g. `team.html`).
+1. Save the USTA team summary (from the 'old' site) as a full HTML file (e.g. `team.html`).
 2. Run the script with Python 3 and pass the saved HTML file:
 
 ```bash
